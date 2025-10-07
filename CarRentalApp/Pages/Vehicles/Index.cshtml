@@ -1,0 +1,54 @@
+﻿@page
+@model CarRentalApp.Pages.Vehicles.IndexModel
+@{
+    ViewData["Title"] = "Vehicle Fleet";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Add New Vehicle</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>License Plate</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <tr>
+                <td>
+                    <img src="@vehicle.ImageUrl" style="max-width: 150px; border-radius: 5px;" alt="Vehicle Image" />
+                </td>
+                <td>@vehicle.PartitionKey</td>
+                <td>@vehicle.Model</td>
+                <td>@vehicle.Year</td>
+                <td>@vehicle.RowKey</td>
+                <td>
+                    @if (vehicle.IsAvailable)
+                    {
+                        <span class="badge bg-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Rented</span>
+                    }
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-partitionKey="@vehicle.PartitionKey" asp-route-rowKey="@vehicle.RowKey" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-page="./Delete" asp-route-partitionKey="@vehicle.PartitionKey" asp-route-rowKey="@vehicle.RowKey" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

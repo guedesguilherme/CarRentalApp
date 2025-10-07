@@ -1,0 +1,55 @@
+﻿@page
+@model CarRentalApp.Pages.ClientAreaModel
+@{
+    ViewData["Title"] = "Client Area";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>Enter your registration email to view your rental history.</p>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="input-group mb-3">
+                <input asp-for="SearchEmail" type="email" class="form-control" placeholder="Enter your email..." />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@if (Model.SearchPerformed)
+{
+    <h3>Rental History for @Model.SearchEmail</h3>
+
+    @if (Model.Rentals.Any())
+    {
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Vehicle Plate</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rental in Model.Rentals)
+                {
+                    <tr>
+                        <td>@rental.VehiclePlate</td>
+                        <td>@rental.StartDate.Value.ToShortDateString()</td>
+                        <td>@rental.EndDate.Value.ToShortDateString()</td>
+                        <td>$@rental.TotalCost.Value.ToString("F2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="mt-3">No rentals found for this email address.</p>
+    }
+}

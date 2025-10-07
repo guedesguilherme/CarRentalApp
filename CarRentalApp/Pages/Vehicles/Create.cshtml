@@ -1,0 +1,50 @@
+﻿@page
+@model CarRentalApp.Pages.Vehicles.CreateModel
+@{
+    ViewData["Title"] = "Add New Vehicle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Vehicle.PartitionKey" class="control-label">Make (e.g., Ford)</label>
+                <input asp-for="Vehicle.PartitionKey" class="form-control" />
+                <span asp-validation-for="Vehicle.PartitionKey" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Vehicle.RowKey" class="control-label">License Plate (Unique ID)</label>
+                <input asp-for="Vehicle.RowKey" class="form-control" />
+                <span asp-validation-for="Vehicle.RowKey" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Vehicle.Model" class="control-label"></label>
+                <input asp-for="Vehicle.Model" class="form-control" />
+                <span asp-validation-for="Vehicle.Model" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Vehicle.Year" class="control-label"></label>
+                <input asp-for="Vehicle.Year" class="form-control" />
+                <span asp-validation-for="Vehicle.Year" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="imageUpload" class="control-label">Vehicle Photo</label>
+                <input asp-for="ImageUpload" class="form-control" type="file" required />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

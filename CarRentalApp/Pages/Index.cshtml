@@ -1,0 +1,59 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="hero-section rounded-3 mb-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Your Next Adventure Starts Here</h1>
+        <p class="lead">Find the perfect car for your road trip, business travel, or weekend getaway.</p>
+        <a class="btn btn-primary btn-lg" asp-page="/Vehicles/Index">View Our Fleet</a>
+    </div>
+</div>
+
+<div class="text-center mb-4">
+    <h2>Featured Vehicles</h2>
+    <p class="lead">Check out some of our most popular cars, available now.</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var vehicle in Model.FeaturedVehicles)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@vehicle.ImageUrl" class="card-img-top" alt="@vehicle.Model" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@vehicle.PartitionKey @vehicle.Model</h5>
+                    <p class="card-text">
+                        <strong>Year:</strong> @vehicle.Year <br />
+                        <strong>License Plate:</strong> @vehicle.RowKey
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a asp-page="/Rentals/Create" class="btn btn-success w-100">Rent Now</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<hr class="my-5">
+
+<div class="text-center mb-4">
+    <h2>Simple & Fast Rentals</h2>
+</div>
+<div class="row text-center">
+    <div class="col-md-4">
+        <h3>1. Choose a Car</h3>
+        <p>Browse our fleet and select the vehicle that best suits your needs.</p>
+    </div>
+    <div class="col-md-4">
+        <h3>2. Book Your Dates</h3>
+        <p>Select your pickup and return dates with our easy-to-use rental form.</p>
+    </div>
+    <div class="col-md-4">
+        <h3>3. Drive Away</h3>
+        <p>Pick up your keys and start your journey. It's that simple!</p>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@page
+@model CarRentalApp.Pages.Rentals.IndexModel
+@{
+    ViewData["Title"] = "Rental History";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New Rental</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Vehicle Plate</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model.Rentals)
+        {
+            <tr>
+                <td>@rental.PartitionKey</td>
+                <td>@rental.VehiclePlate</td>
+                <td>@rental.StartDate.Value.ToShortDateString()</td>
+                <td>@rental.EndDate.Value.ToShortDateString()</td>
+                <td>$@rental.TotalCost.Value.ToString("F2")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿@page
+@model CarRentalApp.Pages.Vehicles.EditModel
+@{
+    ViewData["Title"] = "Edit Vehicle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Vehicle.PartitionKey" />
+            <input type="hidden" asp-for="Vehicle.RowKey" />
+            <input type="hidden" asp-for="Vehicle.ImageUrl" />
+
+            <div class="form-group mb-3">
+                <label>Make</label>
+                <input asp-for="Vehicle.PartitionKey" class="form-control" disabled />
+            </div>
+            <div class="form-group mb-3">
+                <label>License Plate</label>
+                <input asp-for="Vehicle.RowKey" class="form-control" disabled />
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Vehicle.Model" class="control-label"></label>
+                <input asp-for="Vehicle.Model" class="form-control" />
+                <span asp-validation-for="Vehicle.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Vehicle.Year" class="control-label"></label>
+                <input asp-for="Vehicle.Year" class="form-control" />
+                <span asp-validation-for="Vehicle.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Vehicle.IsAvailable" /> @Html.DisplayNameFor(model => model.Vehicle.IsAvailable)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
